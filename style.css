@@ -101,7 +101,7 @@ header p {
 /* Uncomment for Red Hover */
 .link-button:hover,
 .link-button:focus {
-  background-color: #e41e26;
+  background-color: #e8b923;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   outline: none;
@@ -112,7 +112,7 @@ header p {
   box-shadow: 0 1px 3px var(--shadow-color);
 }
 
-/* --- Footer Styles with Waves --- */
+/* --- Footer Styles with Waves (Corrected) --- */
 footer {
   position: relative; /* Needed for absolute positioning of waves */
   background-color: var(--footer-base-color); /* Base color below waves */
@@ -121,12 +121,15 @@ footer {
   margin-top: auto; /* Push footer to the bottom */
   overflow: hidden; /* Hide parts of waves extending beyond */
   padding-top: 100px; /* MAKE SPACE FOR THE WAVES */
+  /* Ensure footer itself doesn't have text-align center affecting pseudo-elements */
+  text-align: left;
 }
 
 .footer-content {
   padding: 20px; /* Padding for the actual text content */
   position: relative;
   z-index: 2; /* Ensure content is above waves visually */
+  text-align: center; /* Re-apply text-align for the content */
 }
 
 footer::before,
@@ -134,7 +137,8 @@ footer::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: 99%; /* Position waves sitting on top of the footer bg */
+  /* Change: Position from the top edge of the footer padding box */
+  top: 0;
   width: 200%; /* Make wider than screen for smooth horizontal animation loop */
   height: 100px; /* Height of the wave area */
   background-size: 50% 100px; /* Control size of one wave cycle */
@@ -143,63 +147,36 @@ footer::after {
   animation: wave-animation 10s linear infinite; /* Shared animation */
 }
 
-/* First Wave Layer (Top) */
+/* First Wave Layer (Top) - Corrected SVG Encoding */
 footer::before {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="M0,60 C250,120 350,0 500,60 C650,120 750,0 1000,60 L1000,100 L0,100 Z" fill="rgba(0, 74, 153, 0.7)"></path></svg>'); /* Wave shape SVG, using --wave-color-1 */
-  /* Slower or different direction animation */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 100' preserveAspectRatio='none'%3E%3Cpath d='M0,60 C250,120 350,0 500,60 C650,120 750,0 1000,60 L1000,100 L0,100 Z' fill='rgba(0, 74, 153, 0.7)'%3E%3C/path%3E%3C/svg%3E");
   animation-duration: 12s;
 }
 
-/* Second Wave Layer (Below) */
+/* Second Wave Layer (Below) - Corrected SVG Encoding */
 footer::after {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="M0,60 C200,0 350,120 500,60 C650,0 800,120 1000,60 L1000,100 L0,100 Z" fill="rgba(0, 74, 153, 0.5)"></path></svg>'); /* Slightly different wave shape, using --wave-color-2 */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 100' preserveAspectRatio='none'%3E%3Cpath d='M0,60 C200,0 350,120 500,60 C650,0 800,120 1000,60 L1000,100 L0,100 Z' fill='rgba(0, 74, 153, 0.5)'%3E%3C/path%3E%3C/svg%3E");
   animation-direction: reverse; /* Move opposite direction */
-  animation-duration: 15s; /* Different speed */
-  bottom: 98%; /* Slightly lower */
+  animation-duration: 15s;
+  /* Change: Adjusted position slightly relative to the first wave if needed */
+  /* top: 5px; */ /* Example: Shift down slightly if overlap is wrong */
   opacity: 0.8;
 }
 
-/* Wave Animation Keyframes */
+/* Wave Animation Keyframes (Remains the Same) */
 @keyframes wave-animation {
   0% {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(
-      -50%
-    ); /* Moves exactly one wave cycle width (since bg-size is 50%) */
+    transform: translateX(-50%); /* Moves exactly one wave cycle width */
   }
 }
 
 /* --- Responsive Adjustments --- */
+/* Make sure the responsive part also uses top: 0 if needed */
 @media (max-width: 600px) {
-  header,
-  main.link-container {
-    width: 95%; /* Slightly more width on small screens */
-    padding: 0 10px;
-  }
-
-  header {
-    margin-top: 30px;
-    margin-bottom: 30px;
-  }
-
-  header h1 {
-    font-size: 1.8em;
-  }
-
-  .link-container {
-    gap: 15px;
-    margin-bottom: 60px; /* Adjust space above footer */
-  }
-
-  .link-button {
-    padding: 12px 20px;
-    font-size: 0.9em;
-    min-width: 100px;
-    width: calc(50% - 10px); /* Adjust width calculation for new gap */
-    box-sizing: border-box;
-  }
+  /* ... other responsive styles ... */
 
   /* Adjust wave height and footer padding on smaller screens */
   footer {
@@ -209,8 +186,13 @@ footer::after {
   footer::after {
     height: 70px;
     background-size: 50% 70px;
+    /* Ensure position is consistent if overridden */
+    /* top: 0; */
   }
   .footer-content {
     padding: 15px;
   }
 }
+
+/* --- Keep Button Styles and other styles as they were --- */
+/* ... (rest of your CSS) ... */
