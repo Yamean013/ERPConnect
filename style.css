@@ -1,103 +1,125 @@
 /* --- Global Styles & Variables --- */
 :root {
-  --primary-color: #007bff; /* A nice blue */
-  --primary-hover-color: #0056b3; /* Darker blue for hover */
-  --background-gradient: linear-gradient(
-    to right bottom,
-    #f8f9fa,
-    #e9ecef
-  ); /* Subtle gradient */
-  --text-color: #333;
-  --button-text-color: #ffffff;
+  /* MTCC Inspired Colors */
+  --primary-color: #004a99; /* MTCC Dark Blue (Headers, Buttons, Footer) */
+  --primary-hover-color: #005ab3; /* Slightly Lighter Blue for Hover */
+  /* Alternative Hover: --primary-hover-color: #e41e26; */ /* MTCC Red for stronger hover contrast */
+
+  --background-color: #ffffff; /* White Background */
+  --text-color: #333333; /* Standard Dark Text */
+  --muted-text-color: #6c757d; /* Grey for less important text */
+  --button-text-color: #ffffff; /* White Text on Buttons/Footer */
+  --footer-bg-color: var(
+    --primary-color
+  ); /* Footer background matches primary blue */
   --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
 body {
   margin: 0;
   padding: 20px;
-  font-family: "Roboto", sans-serif; /* Use Google Font */
-  background: var(--background-gradient);
+  font-family: "Roboto", sans-serif;
+  background: var(--background-color); /* Use solid white background */
   color: var(--text-color);
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center vertically */
-  align-items: center; /* Center horizontally */
-  min-height: 100vh; /* Ensure body takes full viewport height */
+  justify-content: flex-start; /* Align content to the top */
+  align-items: center;
+  min-height: 100vh;
   text-align: center;
-  box-sizing: border-box; /* Include padding in element's total width/height */
+  box-sizing: border-box;
 }
 
 /* --- Header Styles --- */
 header {
+  margin-top: 40px; /* Add some space from the top */
   margin-bottom: 40px;
+  width: 100%;
+  max-width: 800px; /* Limit width */
 }
 
 header h1 {
-  color: var(--primary-color);
+  color: var(--primary-color); /* Use MTCC blue for main heading */
   margin-bottom: 10px;
 }
 
 header p {
-  color: #6c757d; /* Muted text color */
+  color: var(--muted-text-color); /* Muted text color for subtitle */
   font-size: 1.1em;
 }
 
 /* --- Link Container & Button Styles --- */
 .link-container {
-  display: flex; /* Arrange items horizontally */
-  justify-content: center; /* Center buttons within the container */
-  align-items: center; /* Align items vertically */
-  flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
-  gap: 25px; /* Spacing between buttons */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 25px;
   width: 100%;
-  max-width: 800px; /* Limit maximum width */
-  margin-bottom: 40px;
+  max-width: 800px;
+  margin-bottom: 60px; /* Add more space below buttons */
 }
 
 .link-button {
-  display: inline-block; /* Treat as a block but flow inline */
-  padding: 15px 30px; /* Vertical and horizontal padding */
-  background-color: var(--primary-color);
-  color: var(--button-text-color);
-  text-decoration: none; /* Remove underline from links */
-  border-radius: 8px; /* Rounded corners */
+  display: inline-block;
+  padding: 15px 30px;
+  background-color: var(--primary-color); /* MTCC blue button background */
+  color: var(--button-text-color); /* White button text */
+  text-decoration: none;
+  border-radius: 5px; /* Slightly less rounded corners, similar to MTCC */
   font-weight: bold;
   font-size: 1em;
   text-align: center;
-  box-shadow: 0 4px 8px var(--shadow-color); /* Subtle shadow for depth */
+  box-shadow: 0 2px 5px var(--shadow-color); /* Adjusted shadow */
   transition: background-color 0.3s ease, transform 0.2s ease,
-    box-shadow 0.3s ease; /* Smooth transitions */
-  min-width: 120px; /* Ensure buttons have a minimum width */
-  border: none; /* Remove default border */
-  cursor: pointer; /* Indicate it's clickable */
+    box-shadow 0.3s ease;
+  min-width: 120px;
+  border: none;
+  cursor: pointer;
 }
 
 .link-button:hover,
 .link-button:focus {
-  /* Add focus state for accessibility */
-  background-color: var(--primary-hover-color);
-  transform: translateY(-3px); /* Slight lift effect */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Slightly larger shadow on hover */
-  outline: none; /* Remove default focus outline if custom style is sufficient */
+  background-color: var(--primary-hover-color); /* Use defined hover color */
+  transform: translateY(-2px); /* Slightly reduced lift */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  outline: none;
 }
 
+/* Uncomment this line and comment out the one above to use the MTCC red for hover */
+/* .link-button:hover,
+.link-button:focus {
+    background-color: #e41e26;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    outline: none;
+} */
+
 .link-button:active {
-  transform: translateY(1px); /* Press down effect */
-  box-shadow: 0 2px 4px var(--shadow-color); /* Smaller shadow when pressed */
+  transform: translateY(1px);
+  box-shadow: 0 1px 3px var(--shadow-color);
 }
 
 /* --- Footer Styles --- */
 footer {
+  background-color: var(--footer-bg-color); /* MTCC blue footer background */
+  color: var(--button-text-color); /* White footer text */
+  padding: 20px 0; /* Add vertical padding */
   margin-top: auto; /* Push footer to the bottom */
-  padding-top: 20px;
+  width: 100%; /* Make footer span full width */
   font-size: 0.9em;
-  color: #6c757d;
 }
 
 /* --- Responsive Adjustments (Optional but Recommended) --- */
 @media (max-width: 600px) {
   body {
     padding: 15px;
+    justify-content: flex-start; /* Keep content aligned top */
+  }
+
+  header {
+    margin-top: 20px;
+    margin-bottom: 30px;
   }
 
   header h1 {
@@ -105,16 +127,19 @@ footer {
   }
 
   .link-container {
-    gap: 15px; /* Reduce gap on smaller screens */
+    gap: 15px;
+    margin-bottom: 40px;
   }
 
   .link-button {
-    padding: 12px 25px; /* Slightly smaller padding */
+    padding: 12px 20px; /* Adjust padding */
     font-size: 0.9em;
     min-width: 100px;
-    width: calc(
-      50% - 15px
-    ); /* Make buttons take up roughly half width on small screens */
-    box-sizing: border-box; /* Ensure padding is included in width calculation */
+    width: calc(50% - 10px); /* Adjust width calculation for new gap */
+    box-sizing: border-box;
+  }
+
+  footer {
+    padding: 15px 0;
   }
 }
