@@ -1,0 +1,120 @@
+/* --- Global Styles & Variables --- */
+:root {
+  --primary-color: #007bff; /* A nice blue */
+  --primary-hover-color: #0056b3; /* Darker blue for hover */
+  --background-gradient: linear-gradient(
+    to right bottom,
+    #f8f9fa,
+    #e9ecef
+  ); /* Subtle gradient */
+  --text-color: #333;
+  --button-text-color: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: "Roboto", sans-serif; /* Use Google Font */
+  background: var(--background-gradient);
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  min-height: 100vh; /* Ensure body takes full viewport height */
+  text-align: center;
+  box-sizing: border-box; /* Include padding in element's total width/height */
+}
+
+/* --- Header Styles --- */
+header {
+  margin-bottom: 40px;
+}
+
+header h1 {
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+header p {
+  color: #6c757d; /* Muted text color */
+  font-size: 1.1em;
+}
+
+/* --- Link Container & Button Styles --- */
+.link-container {
+  display: flex; /* Arrange items horizontally */
+  justify-content: center; /* Center buttons within the container */
+  align-items: center; /* Align items vertically */
+  flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+  gap: 25px; /* Spacing between buttons */
+  width: 100%;
+  max-width: 800px; /* Limit maximum width */
+  margin-bottom: 40px;
+}
+
+.link-button {
+  display: inline-block; /* Treat as a block but flow inline */
+  padding: 15px 30px; /* Vertical and horizontal padding */
+  background-color: var(--primary-color);
+  color: var(--button-text-color);
+  text-decoration: none; /* Remove underline from links */
+  border-radius: 8px; /* Rounded corners */
+  font-weight: bold;
+  font-size: 1em;
+  text-align: center;
+  box-shadow: 0 4px 8px var(--shadow-color); /* Subtle shadow for depth */
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    box-shadow 0.3s ease; /* Smooth transitions */
+  min-width: 120px; /* Ensure buttons have a minimum width */
+  border: none; /* Remove default border */
+  cursor: pointer; /* Indicate it's clickable */
+}
+
+.link-button:hover,
+.link-button:focus {
+  /* Add focus state for accessibility */
+  background-color: var(--primary-hover-color);
+  transform: translateY(-3px); /* Slight lift effect */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Slightly larger shadow on hover */
+  outline: none; /* Remove default focus outline if custom style is sufficient */
+}
+
+.link-button:active {
+  transform: translateY(1px); /* Press down effect */
+  box-shadow: 0 2px 4px var(--shadow-color); /* Smaller shadow when pressed */
+}
+
+/* --- Footer Styles --- */
+footer {
+  margin-top: auto; /* Push footer to the bottom */
+  padding-top: 20px;
+  font-size: 0.9em;
+  color: #6c757d;
+}
+
+/* --- Responsive Adjustments (Optional but Recommended) --- */
+@media (max-width: 600px) {
+  body {
+    padding: 15px;
+  }
+
+  header h1 {
+    font-size: 1.8em;
+  }
+
+  .link-container {
+    gap: 15px; /* Reduce gap on smaller screens */
+  }
+
+  .link-button {
+    padding: 12px 25px; /* Slightly smaller padding */
+    font-size: 0.9em;
+    min-width: 100px;
+    width: calc(
+      50% - 15px
+    ); /* Make buttons take up roughly half width on small screens */
+    box-sizing: border-box; /* Ensure padding is included in width calculation */
+  }
+}
