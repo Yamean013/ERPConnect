@@ -1,28 +1,28 @@
+/* Import Google Font */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
 /* --- Global Styles & Variables --- */
 :root {
   /* MTCC Inspired Colors */
   --primary-color: #004a99; /* MTCC Dark Blue */
   --primary-hover-color: #005ab3; /* Lighter Blue for Hover */
-  /* --primary-hover-color: #e41e26; */ /* Alternative: MTCC Red Hover */
+  --primary-hover-color: #e41e26; /* Alternative: MTCC Red Hover #e41e26 */
 
-  /* UPDATED: Light grey background */
+  /* Light grey background */
   --background-color: #f8f9fa; /* Very Light Grey Background */
 
   --text-color: #333333; /* Standard Dark Text */
   --muted-text-color: #6c757d; /* Grey for less important text */
-  --button-text-color: #ffffff; /* White Text on Buttons/Footer */
+  --button-text-color: #ffffff; /* White Text on Buttons */
 
-  /* Footer wave colors */
-  --wave-color-1: rgba(0, 74, 153, 0.7); /* Semi-transparent primary */
-  --wave-color-2: rgba(0, 74, 153, 0.5); /* More transparent primary */
-  --footer-base-color: var(--primary-color); /* Solid base for footer */
+  /* Footer base color is no longer needed for background */
+  /* Wave colors removed as they are no longer used */
 
   --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
 body {
   margin: 0;
-  /* Remove padding: 0; Add padding later if needed around content */
   font-family: "Roboto", sans-serif;
   background-color: var(
     --background-color
@@ -68,10 +68,9 @@ header p {
   align-items: center;
   flex-wrap: wrap;
   gap: 25px;
-  margin-bottom: 80px; /* More space above footer waves */
+  margin-bottom: 80px; /* Space above footer */
 }
 
-/* Buttons remain the same - contrast is good with light grey bg */
 .link-button {
   display: inline-block;
   padding: 15px 30px;
@@ -98,101 +97,125 @@ header p {
   outline: none;
 }
 
-/* Uncomment for Red Hover */
-.link-button:hover,
-.link-button:focus {
-  background-color: #e8b923;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  outline: none;
-}
-
 .link-button:active {
   transform: translateY(1px);
   box-shadow: 0 1px 3px var(--shadow-color);
 }
 
-/* --- Footer Styles with Waves (Corrected) --- */
+/* --- Footer Styles with CSS Wave Animation --- */
+
 footer {
-  position: relative; /* Needed for absolute positioning of waves */
-  background-color: var(--footer-base-color); /* Base color below waves */
-  color: var(--button-text-color); /* White footer text */
+  position: relative; /* Good practice for containing positioned children if needed */
+  background-color: var(
+    --background-color
+  ); /* Footer base matches page background */
   width: 100%;
-  margin-top: auto; /* Push footer to the bottom */
-  overflow: hidden; /* Hide parts of waves extending beyond */
-  padding-top: 100px; /* MAKE SPACE FOR THE WAVES */
-  /* Ensure footer itself doesn't have text-align center affecting pseudo-elements */
-  text-align: left;
+  margin-top: auto; /* *** FIXES FOOTER POSITION *** */
+  color: var(--primary-color); /* Default text color for footer */
+  text-align: center;
+}
+
+.waves {
+  display: block; /* Make SVG a block element */
+  width: 100%;
+  height: 15vh; /* Adjust height as needed */
+  min-height: 100px;
+  max-height: 150px;
+  /* margin-bottom: -7px; /* Remove or adjust if needed after repositioning */
 }
 
 .footer-content {
-  padding: 20px; /* Padding for the actual text content */
-  position: relative;
-  z-index: 2; /* Ensure content is above waves visually */
-  text-align: center; /* Re-apply text-align for the content */
+  padding: 15px; /* Add padding below waves */
+  background-color: var(
+    --primary-color
+  ); /* Apply blue background to content area */
+  color: var(--button-text-color); /* White text on blue background */
+  font-size: 0.9em;
+  position: relative; /* Ensure content stays in flow */
+  z-index: 1; /* Technically above SVG if needed, but likely flows correctly now */
 }
 
-footer::before,
-footer::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  /* Change: Position from the top edge of the footer padding box */
-  top: 0;
-  width: 200%; /* Make wider than screen for smooth horizontal animation loop */
-  height: 100px; /* Height of the wave area */
-  background-size: 50% 100px; /* Control size of one wave cycle */
-  background-repeat: repeat-x;
-  z-index: 1; /* Sit below footer content */
-  animation: wave-animation 10s linear infinite; /* Shared animation */
+/* Animation - Keep as is */
+.parallax > use {
+  animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+}
+.parallax > use:nth-child(1) {
+  animation-delay: -2s;
+  animation-duration: 7s;
+}
+.parallax > use:nth-child(2) {
+  animation-delay: -3s;
+  animation-duration: 10s;
+}
+.parallax > use:nth-child(3) {
+  animation-delay: -4s;
+  animation-duration: 13s;
+}
+.parallax > use:nth-child(4) {
+  animation-delay: -5s;
+  animation-duration: 20s;
 }
 
-/* First Wave Layer (Top) - Corrected SVG Encoding */
-footer::before {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 100' preserveAspectRatio='none'%3E%3Cpath d='M0,60 C250,120 350,0 500,60 C650,120 750,0 1000,60 L1000,100 L0,100 Z' fill='rgba(0, 74, 153, 0.7)'%3E%3C/path%3E%3C/svg%3E");
-  animation-duration: 12s;
-}
-
-/* Second Wave Layer (Below) - Corrected SVG Encoding */
-footer::after {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 100' preserveAspectRatio='none'%3E%3Cpath d='M0,60 C200,0 350,120 500,60 C650,0 800,120 1000,60 L1000,100 L0,100 Z' fill='rgba(0, 74, 153, 0.5)'%3E%3C/path%3E%3C/svg%3E");
-  animation-direction: reverse; /* Move opposite direction */
-  animation-duration: 15s;
-  /* Change: Adjusted position slightly relative to the first wave if needed */
-  /* top: 5px; */ /* Example: Shift down slightly if overlap is wrong */
-  opacity: 0.8;
-}
-
-/* Wave Animation Keyframes (Remains the Same) */
-@keyframes wave-animation {
+@keyframes move-forever {
   0% {
-    transform: translateX(0);
+    transform: translate3d(-90px, 0, 0);
   }
   100% {
-    transform: translateX(-50%); /* Moves exactly one wave cycle width */
+    transform: translate3d(85px, 0, 0);
   }
 }
 
 /* --- Responsive Adjustments --- */
-/* Make sure the responsive part also uses top: 0 if needed */
-@media (max-width: 600px) {
-  /* ... other responsive styles ... */
-
-  /* Adjust wave height and footer padding on smaller screens */
-  footer {
-    padding-top: 70px;
+@media (max-width: 768px) {
+  /* Was 768px in your code */
+  .waves {
+    height: 40px;
+    min-height: 40px;
   }
-  footer::before,
-  footer::after {
-    height: 70px;
-    background-size: 50% 70px;
-    /* Ensure position is consistent if overridden */
-    /* top: 0; */
+  /* Remove the height adjustment for the non-existent .content class */
+  /*
+  .content {
+    height: 30vh;
   }
+  */
+  /* Keep H1 font size adjustment if it was intended */
+  /*
+  h1 {
+    font-size: 24px;
+  }
+  */
   .footer-content {
-    padding: 15px;
+    padding: 10px; /* Adjust content padding */
   }
 }
 
-/* --- Keep Button Styles and other styles as they were --- */
-/* ... (rest of your CSS) ... */
+/* Ensure other responsive rules for header/buttons are kept */
+@media (max-width: 600px) {
+  header,
+  main.link-container {
+    width: 95%;
+    padding: 0 10px;
+  }
+
+  header {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  header h1 {
+    font-size: 1.8em;
+  }
+
+  .link-container {
+    gap: 15px;
+    margin-bottom: 60px; /* Adjust space above footer */
+  }
+
+  .link-button {
+    padding: 12px 20px;
+    font-size: 0.9em;
+    min-width: 100px;
+    width: calc(50% - 10px);
+    box-sizing: border-box;
+  }
+}

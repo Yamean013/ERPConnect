@@ -3,7 +3,7 @@
 // You can add JavaScript interactions here if needed in the future.
 // For now, this file can remain empty or contain basic checks.
 
-console.log("Website initialized. Ready to link applications!");
+console.log("Website initialized");
 
 // Example of potential future interaction (optional):
 // document.querySelectorAll('.link-button').forEach(button => {
