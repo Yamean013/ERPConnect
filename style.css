@@ -3,20 +3,15 @@
 
 /* --- Global Styles & Variables --- */
 :root {
-  /* MTCC Inspired Colors */
-  --primary-color: #004a99; /* MTCC Dark Blue */
-  --primary-hover-color: #34ebe8; /* Lighter Blue for Hover */
-  /* --primary-hover-color: #e41e26; Alternative: MTCC Red Hover #e41e26 */
+  --primary-color: #004a99; /* Dark Blue */
+  --primary-hover-color: #34e1eb; /* Lighter Blue for Hover */
 
   /* Light grey background */
   --background-color: #f8f9fa; /* Very Light Grey Background */
 
   --text-color: #333333; /* Standard Dark Text */
   --muted-text-color: #6c757d; /* Grey for less important text */
-  --button-text-color: #ffffff; /* White Text on Buttons */
-
-  /* Footer base color is no longer needed for background */
-  /* Wave colors removed as they are no longer used */
+  --button-text-color: #ffffff; /* White Text on Buttons / Footer Content*/
 
   --shadow-color: rgba(0, 0, 0, 0.1);
 }
@@ -24,30 +19,27 @@
 body {
   margin: 0;
   font-family: "Roboto", sans-serif;
-  background-color: var(
-    --background-color
-  ); /* Use solid light grey background */
+  background-color: var(--background-color);
   color: var(--text-color);
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center direct children like header, main */
-  min-height: 100vh;
+  align-items: center;
+  min-height: 100vh; /* Ensure body takes full viewport height */
   text-align: center;
   box-sizing: border-box;
 }
 
-/* Ensure direct children take appropriate width and have padding */
 header,
 main.link-container {
   width: 90%;
-  max-width: 800px; /* Consistent max width */
-  padding: 0 15px; /* Add horizontal padding here */
+  max-width: 800px;
+  padding: 0 15px;
   box-sizing: border-box;
 }
 
 /* --- Header Styles --- */
 header {
-  margin-top: 50px; /* Increased top margin */
+  margin-top: 50px;
   margin-bottom: 40px;
 }
 
@@ -68,7 +60,7 @@ header p {
   align-items: center;
   flex-wrap: wrap;
   gap: 25px;
-  margin-bottom: 80px; /* Space above footer */
+  margin-bottom: 0;
 }
 
 .link-button {
@@ -77,7 +69,7 @@ header p {
   background-color: var(--primary-color);
   color: var(--button-text-color);
   text-decoration: none;
-  border-radius: 23px;
+  border-radius: 23px; /* Rounded corners */
   font-weight: bold;
   font-size: 1em;
   text-align: center;
@@ -103,39 +95,39 @@ header p {
 }
 
 /* --- Footer Styles with CSS Wave Animation --- */
-
 footer {
-  position: relative; /* Good practice for containing positioned children if needed */
+  position: relative; /* Allows containing absolute elements if needed later */
   background-color: var(
     --background-color
-  ); /* Footer base matches page background */
+  ); /* Match page background, waves sit on this */
   width: 100%;
   margin-top: auto; /* *** FIXES FOOTER POSITION *** */
-  color: var(--primary-color); /* Default text color for footer */
+}
+
+/* Styling for the SVG element container */
+.waves {
+  display: block;
+  width: 100%;
+  height: 15vh; /* Height of the wave area */
+  min-height: 100px;
+  max-height: 150px;
+  overflow: hidden;
+}
+
+/* Styling for the actual content area below the waves */
+.footer-content {
+  padding: 20px; /* Spacing for the copyright text */
+  background-color: var(
+    --primary-color
+  ); /* Blue background for the content bar */
+  color: var(--button-text-color); /* White text for copyright */
+  font-size: 0.9em;
+  position: relative; /* Ensure it stays in flow */
+  z-index: 1; /* Conceptually above waves if overlap occurred */
   text-align: center;
 }
 
-.waves {
-  display: block; /* Make SVG a block element */
-  width: 100%;
-  height: 15vh; /* Adjust height as needed */
-  min-height: 100px;
-  max-height: 150px;
-  /* margin-bottom: -7px; /* Remove or adjust if needed after repositioning */
-}
-
-.footer-content {
-  padding: 15px; /* Add padding below waves */
-  background-color: var(
-    --primary-color
-  ); /* Apply blue background to content area */
-  color: var(--button-text-color); /* White text on blue background */
-  font-size: 0.9em;
-  position: relative; /* Ensure content stays in flow */
-  z-index: 1; /* Technically above SVG if needed, but likely flows correctly now */
-}
-
-/* Animation - Keep as is */
+/* Animation for the wave layers */
 .parallax > use {
   animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
 }
@@ -156,6 +148,7 @@ footer {
   animation-duration: 20s;
 }
 
+/* Keyframes for the horizontal wave movement */
 @keyframes move-forever {
   0% {
     transform: translate3d(-90px, 0, 0);
@@ -165,57 +158,81 @@ footer {
   }
 }
 
-/* --- Responsive Adjustments --- */
+/* --- Responsive Adjustments / Mobile Optimizations --- */
+
+/* Tablets / Small Desktops */
 @media (max-width: 768px) {
-  /* Was 768px in your code */
   .waves {
-    height: 40px;
-    min-height: 40px;
+    height: 60px; /* Reduced wave height */
+    min-height: 60px;
   }
-  /* Remove the height adjustment for the non-existent .content class */
-  /*
-  .content {
-    height: 30vh;
-  }
-  */
-  /* Keep H1 font size adjustment if it was intended */
-  /*
-  h1 {
-    font-size: 24px;
-  }
-  */
   .footer-content {
-    padding: 10px; /* Adjust content padding */
+    padding: 15px; /* Adjust content padding */
+  }
+  /* Adjust main content bottom margin if needed to prevent overlap */
+  main.link-container {
+    margin-bottom: 0;
   }
 }
 
-/* Ensure other responsive rules for header/buttons are kept */
+/* Small Tablets / Large Phones */
 @media (max-width: 600px) {
   header,
   main.link-container {
     width: 95%;
     padding: 0 10px;
   }
-
   header {
     margin-top: 30px;
     margin-bottom: 30px;
   }
-
   header h1 {
     font-size: 1.8em;
   }
-
   .link-container {
     gap: 15px;
-    margin-bottom: 60px; /* Adjust space above footer */
-  }
-
+    margin-bottom: 0;
+  } /* Ensure no gap below buttons */
   .link-button {
     padding: 12px 20px;
     font-size: 0.9em;
     min-width: 100px;
-    width: calc(50% - 10px);
+    width: calc(50% - 10px); /* Two columns */
     box-sizing: border-box;
+  }
+  .waves {
+    height: 40px; /* Further reduced wave height */
+    min-height: 40px;
+  }
+  .footer-content {
+    padding: 10px;
+  }
+}
+
+/* Very Small Screens (Narrow Phones) */
+@media (max-width: 400px) {
+  header h1 {
+    font-size: 1.6em;
+  }
+  header p {
+    font-size: 1em;
+  }
+  .link-container {
+    gap: 12px; /* Slightly reduce gap further */
+  }
+  .link-button {
+    width: 90%; /* Stack buttons vertically (one column) */
+    min-width: initial; /* Remove min-width constraint */
+    padding: 15px; /* Adjust padding for single column */
+    margin-left: auto; /* Center single buttons if needed */
+    margin-right: auto;
+  }
+  .waves {
+    height: 30px; /* Minimal wave height */
+    min-height: 30px;
+  }
+  .footer-content {
+    padding: 8px;
+    font-size: 0.8em;
   }
 }
